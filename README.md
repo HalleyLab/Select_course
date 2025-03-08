@@ -51,7 +51,7 @@ console.log(contents)
 ```
 这段 JavaScript 代码表明获取对应 html 文件中所有以 div 方式放入网页的元素，并将其中的内容存入变量 contents，然后在控制台输出该变量。从该代码中可以直观发现，div 等类别在 JavaScript 中被称为 TagName。
 
-#### 1.3 可以认为给元素赋予一个class或ID
+#### 1.3 可以手动给元素赋予一个class或ID
 
 按 1.2 中的方法只能同时对整个 html 文件中相同 TagName 的元素进行处理，然而在很多情况下我们需要对不同元素设置不同样式。html 语言允许我们在放入元素时设置 class 以及 ID 参数。
 

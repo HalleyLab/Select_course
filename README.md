@@ -176,7 +176,7 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
 ```
 
 ### 8#
-现在假设需要选取专业基础课程下的会计学，并选择第一个教学班。
+现在假设需要选取专业基础课程下的会计学，并选择第一个教学班。这里会出现多个选课按钮，要注意所需教学班的选课按钮的特征参数，也可以用 and 连接所有参数均加入 XPATH。
 ```python
   general = WebDriverWait(driver, 10).until(
     EC.presence_of_element_located(
@@ -193,11 +193,17 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
   accountancy.click()
 
   selection_button = WebDriverWait(driver, 10).until(
-    EC.presence_of_element_located(
-      (By.XPATH, '//button[@data-xkkh="(2024-2025-2)-ECON1003F-0013201-1"]')
+    EC.element_to_be_clickable(
+      (By.XPATH, '//button[@data-xkkh="(2024-2025-2)-ECON1003F-0013201-1" and @type="button"]')
         )
-    ) # 定位选课按钮，注意不同选课按钮的哪一个参数是独特的，这里data-xkkh是特征参数
+    ) # 定位选课按钮，注意确认不同选课按钮的哪一个参数是独特的，这里data-xkkh是特征参数
   selection_button.click()
+```
+可以发现在定位按钮时用EC.element_to_be_clickable()取代了EC.presence_of_element_located()，这是因为后者只要按钮出现就会进行点击，然而此时按钮可能还不能点击。
+
+此外，元素必须要在视窗内才能点击，可以通过下述代码滑动网页来使其可见。
+```python
+  driver.execute_script("arguments[0].scrollIntoView(true);", selection_button) #滑动网页至元素可见
 ```
 ![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig9.png)
 ![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig10.png)

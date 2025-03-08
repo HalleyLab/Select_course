@@ -98,3 +98,4 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
   ) # 通过按钮ID定位
   button.click()  # 点击按钮
 ```
+![image](https://github.com/HalleyLab/Select_course/blob/main/fig3.png)

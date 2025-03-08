@@ -8,8 +8,13 @@
 
 ## 环境配置
 **Python** 版本 **3.9** 以上！！请前往 **[Python官网](https://www.python.org/downloads/)** 下载对应版本！并安装Selenium包！
+```python
+  pip install -U selenium
+```
 
 ## 构建思路
+
+通过开发者工具找到网页中特定元素的参数，再通过selenium库启动网页并模拟鼠标点击行为来进行机械性重复操作。
 
 #### 1. 网页组成
 

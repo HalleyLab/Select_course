@@ -71,11 +71,11 @@ console.log(contents)
 
 开发者工具如下图所示。导航栏的第一个选项“元素”中展示了所显示网页对应的html代码。
 
-![image](https://github.com/HalleyLab/Select_course/blob/main/fig1.png)
+![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig1.png)
 
 将 html 代码中嵌套的元素不断展开，直到找到我们想要的元素内容，把鼠标放在对应代码上会发现网页中对应内容变为高亮，通过这种方法我们可以得到网页中特定内容的参数。例如从下图中我们可以得到上面的话 **“开发者工具如下图所示。导航栏的第一个选项“元素”中展示了所显示网页对应的html代码。”** 在被放入网页时赋予了参数 **data-sourcepos** 和 **dir** ，值分别为 **"70:1-70:121"** 和 **"auto"**，并且文本以 **p** 的方式放入网页，此时把 **data-sourcepos** 理解为与 **1.3** 中 **ID** 类似的参数即可。
 
-![image](https://github.com/HalleyLab/Select_course/blob/main/fig2.png)
+![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig2.png)
 
 #### 3. Selenium库
 
@@ -103,7 +103,7 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
   ) # 通过按钮ID定位
   button.click()  # 点击按钮
 ```
-![image](https://github.com/HalleyLab/Select_course/blob/main/fig3.png)
+![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig3.png)
 
 进入登录界面后同理获得用户名、密码输入框以及登录按钮的 ID，输入并点击。
 ```python
@@ -119,5 +119,5 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
   login_button.click()  # 点击登录
 ```
 
-![image](https://github.com/HalleyLab/Select_course/blob/main/fig3.png)
+![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig4.png)
 

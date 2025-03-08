@@ -7,7 +7,7 @@
 生活中我们经常会遇到需要通过在浏览器中与网页交互进行选课、抢票等操作，然而由于网速、手速等原因，结果往往不尽如人意。本项目旨在提供一种非常容易理解和自己构建脚本的思路，由于机器的操作速度往往较手动快，其成功率理论上应比手动操作高。
 
 ## 环境配置
-**Python** 版本 **3.9** 以上！！请前往 **[Python官网](https://www.python.org/downloads/)** 下载对应版本！并安装Selenium包！
+**Python** 版本 **3.9** 以上！！请前往 **[Python官网](https://www.python.org/downloads/)** 下载对应版本！并安装Selenium包！需要下载对应浏览器驱动 ( [见下文](#download) )！
 ```python
   pip install -U selenium
 ```
@@ -16,7 +16,7 @@
 
 通过开发者工具找到网页中特定元素的参数，再通过selenium库启动网页并模拟鼠标点击行为来进行机械性重复操作。
 
-#### 1. 网页组成
+### 1. 网页组成
 
 本项目是基于与网页交互来构建脚本的，因此需要对网页的组成有基本认识。
 简单而言，我们在浏览器中所看到的网页多以 **html语言** 编写，其传输遵循 **http协议** ，不论多复杂的网页，其 html 文件基本的构建思路都是放入一个个元素来充当网页的内容。
@@ -77,7 +77,7 @@ console.log(contents)
 
 ![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig2.png)
 
-#### 3. Selenium库
+<h3 id = "download"> Selenium库</h3>
 
 Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠标点击网页进行交互。可以在 [Selenium库官网](https://pypi.org/project/selenium/) 找到此库的安装方法和使用示例。 这个网站 ( https://selenium-python.readthedocs.io/ ) 也总结了 Python 的 Selenium 库的使用示例。
 
@@ -90,12 +90,16 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
 
 ## 实操演示
 
-这里以在Chrome浏览器进行选课操作为例。首先通过驱动打开所需网站。
+这里以在Chrome浏览器进行选课操作为例。
+### 1#
+首先通过驱动打开所需网站。
 ```python
   driver = webdriver.Chrome()
   driver.get("http://xxx.xxx.edu/") # 填入本学校选课网址
 ```
-进入网站后，按照上面描述的方法找到进入按钮对应的元素参数，如下图，ID 为 "ssodl"，由于 ID 唯一，可以直接通过 ID 定位该按钮。**可以在开发者工具中 Ctrl + F 打开查找直接搜索该元素中所含的文字快速寻找**。
+
+### 2#
+进入网站后，按照上面描述的方法找到进入按钮对应的元素参数，如下图，ID 为 "ssodl"，由于 ID 唯一，可以直接通过 ID 定位该按钮。
 
 ```python
   button = WebDriverWait(driver, 10).until(
@@ -105,7 +109,7 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
 ```
 ![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig3.png)
 
-进入登录界面后同理获得用户名、密码输入框以及登录按钮的 ID，输入并点击。 html 中的 <button> 代表的就是以按钮方式放入元素，寻找这个 TagName 也能帮我们更快地在开发者工具中找到对应的按钮。 <input> 就代表以输入框的方式放入元素。
+进入登录界面后同理获得用户名、密码输入框以及登录按钮的 ID，输入并点击。 html 中的 button 元素代表的是以按钮方式放入，寻找这个 TagName 也能帮我们更快地在开发者工具中找到对应的按钮， input 代表以输入框的方式放入。
 ```python
   username_input = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.ID, "username"))
@@ -118,6 +122,13 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
   login_button = driver.find_element(By.ID, "dl")
   login_button.click()  # 点击登录
 ```
-
 ![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig4.png)
 
+登录后进入另一个操作页面，需要注意的是，此时 html 文件中出现了以 **iframe** 放入的元素，这代表着在网页内放入的元素是另一个完整的网页，然而我们的 driver 变量还停留在前面的网页中，需要把 driver 移至需要操作的内嵌网页内。
+```python
+  iframe = driver.find_element(By.XPATH, '//iframe')
+    driver.switch_to.frame(iframe)  # 切换到 iframe
+```
+![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig5.png)
+
+**可以在开发者工具中 Ctrl + F 打开查找直接搜索该元素中所含的文字快速寻找**。

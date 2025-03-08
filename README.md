@@ -7,7 +7,9 @@
 生活中我们经常会遇到需要通过在浏览器中与网页交互进行选课、抢票等操作，然而由于网速、手速等原因，结果往往不尽如人意。本项目旨在提供一种非常容易理解和自己构建脚本的思路，由于机器的操作速度往往较手动快，其成功率理论上应比手动操作高。
 
 ## 环境配置
-**Python** 版本 **3.9** 以上！！请前往 **[Python官网](https://www.python.org/downloads/)** 下载对应版本！并安装Selenium包！需要下载对应浏览器驱动 ( **[见下文](#download)** )！
+**Python** 版本 **3.9** 以上！！请前往 **[Python官网](https://www.python.org/downloads/)** 下载对应版本！并安装Selenium包！
+
+需要下载对应浏览器驱动 ( **[见下文](#download)** )！
 ```python
   pip install -U selenium
 ```
@@ -207,3 +209,14 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
 ```
 ![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig9.png)
 ![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig10.png)
+
+### 9#
+最后，如果想确认选课结果，可以检测网页弹窗，用上述同样的方法获取弹窗的元素参数，定位后用.text获取元素中文本。
+```python
+  popup = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.XPATH, '//div[@class="alert alert-modal"]//p'))
+    )
+  if popup.text == '现在不是选课时间！':
+    print(popup.text)
+    driver.quit()  # 不是选课时间就退出网页
+```

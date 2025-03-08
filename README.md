@@ -95,7 +95,7 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
   driver = webdriver.Chrome()
   driver.get("http://xxx.xxx.edu/") # 填入本学校选课网址
 ```
-进入网站后，按照上面描述的方法找到进入按钮对应的元素参数，如下图，ID 为 "ssodl"，由于 ID 唯一，可以直接通过 ID 定位该按钮。html 中的 <button> 代表的就是以按钮方式放入元素，寻找这个 TagName 也能帮我们更快地在开发者工具中找到对应的按钮。
+进入网站后，按照上面描述的方法找到进入按钮对应的元素参数，如下图，ID 为 "ssodl"，由于 ID 唯一，可以直接通过 ID 定位该按钮。**可以在开发者工具中 Ctrl + F 打开查找直接搜索该元素中所含的文字快速寻找**。
 
 ```python
   button = WebDriverWait(driver, 10).until(
@@ -105,7 +105,7 @@ Selenium 库允许我们通过Python打开浏览器访问网站，并模拟鼠�
 ```
 ![image](https://github.com/HalleyLab/Select_course/blob/main/figures/fig3.png)
 
-进入登录界面后同理获得用户名、密码输入框以及登录按钮的 ID，输入并点击。
+进入登录界面后同理获得用户名、密码输入框以及登录按钮的 ID，输入并点击。 html 中的 <button> 代表的就是以按钮方式放入元素，寻找这个 TagName 也能帮我们更快地在开发者工具中找到对应的按钮。 <input> 就代表以输入框的方式放入元素。
 ```python
   username_input = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.ID, "username"))
